@@ -53,4 +53,7 @@ jobs:
       - name: Push Docker image to Docker Hub
         if: success()
         run: |
-          docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:${{ steps.docker_meta.outputs.tags }}
+          echo ${{ steps.docker_meta.outputs}}
+          echo ${{ steps.docker_meta.outputs.tags}}
+          echo ${{ steps.docker_meta.outputs.labels}}
+          docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
