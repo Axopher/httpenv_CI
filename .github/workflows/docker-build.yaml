@@ -1,8 +1,7 @@
 name: first CI
 on: push
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: build
-        echo 'building'
+  my_first_job:
+    name: My first job
+  my_second_job:
+    name: My second job
