@@ -31,10 +31,10 @@ jobs:
       - name: Build Docker image and Run container from it
         run: |
           # Build the image
-          docker build -t ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest .
+          docker build -t ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:main .
           
           # Run the container
-          docker run -d --name test-container -p 8888:8888 ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
+          docker run -d --name test-container -p 8888:8888 ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:main
       
       - name: Test the container and shut it down
         run: |
