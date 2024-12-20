@@ -8,9 +8,6 @@ jobs:
     name: Build and Test Docker Image
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Build and Test Docker image
         run: |
           # Build the image
