@@ -1,7 +1,9 @@
 name: first CI
-on: push
+on:
+  push:
+    branches: [main]
 jobs:
   build: 
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The jobwas automatically trigerred ${{github.event_name}}"
+      - run: echo "The jobwas automatically trigerred ${{secrets.event_name}}"
