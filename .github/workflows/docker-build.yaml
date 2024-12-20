@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 jobs:
-  build: 
+  my-test-build: 
     runs-on: ubuntu-latest
     steps:
       - run: docker run -d -p 8888:8888 bretfisher/httpenv
