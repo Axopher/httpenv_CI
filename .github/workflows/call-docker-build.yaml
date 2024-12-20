@@ -14,10 +14,10 @@ jobs:
       - name: Build and Test Docker image
         run: |
           # Build the image
-          docker build -t ${{ vars.DOCKERHUB_USERNAME }}/httpenv:latest .
+          docker build -t ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest .
           
           # Run the container
-          docker run -d --name test-container -p 8888:8888 ${{ vars.DOCKERHUB_USERNAME }}/httpenv:latest
+          docker run -d --name test-container -p 8888:8888 ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
           
           # Test the container
           sleep 20  # Allow container to start
