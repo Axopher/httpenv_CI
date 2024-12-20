@@ -8,21 +8,37 @@ jobs:
     name: Build and Test Docker Image
     runs-on: ubuntu-latest
     steps:
+
+    # checkout to dockerfile repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build and Test Docker image
+    # Generate metadata (tags and labels)
+      - name: Docker meta
+        id: docker_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}
+          tags: |
+            type=raw,value=latest
+            type=ref,event=branch
+            type=ref,event=pr
+          labels: |
+            org.opencontainers.image.source=${{ github.repository }}
+            org.opencontainers.image.version=${{ github.sha }}
+            org.opencontainers.image.created=${{ steps.docker_meta.outputs.created }}
+
+      - name: Build Docker image and Run container from it
         run: |
           # Build the image
           docker build -t ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest .
           
           # Run the container
           docker run -d --name test-container -p 8888:8888 ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
-          
-          # Test the container
-          sleep 20  # Allow container to start
+      
+      - name: Test the container and shut it down
+        run: |
           curl -f http://localhost:8888
-          
           # Stop and remove the container
           docker stop test-container
           docker rm test-container
@@ -37,4 +53,4 @@ jobs:
       - name: Push Docker image to Docker Hub
         if: success()
         run: |
-          docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
+          docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:${{ steps.docker_meta.outputs.tags }}
