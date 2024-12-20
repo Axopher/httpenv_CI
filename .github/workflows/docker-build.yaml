@@ -1,7 +1,6 @@
 name: first CI
 on: push
 jobs:
-  my_first_job:
-    name: My first job
-  my_second_job:
-    name: My second job
+  runs-on : ubuntu-latest
+  steps:
+    - run: echo "The jobwas automatically trigerred ${{github.event_name}}"
