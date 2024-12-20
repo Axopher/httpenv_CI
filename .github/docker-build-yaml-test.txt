@@ -1,0 +1,11 @@
+# # this is my personal CI
+# name: first CI
+# on:
+#   push:
+#     branches: [main]
+# jobs:
+#   my-test-build: 
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: docker run -d -p 8888:8888 bretfisher/httpenv
+#       - run: curl localhost:8888
