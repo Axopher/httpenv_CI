@@ -37,5 +37,4 @@ jobs:
       - name: Push Docker image to Docker Hub
         if: success()
         run: |
-          docker tag httpenv:latest ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
           docker push ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_USERNAME }}:latest
